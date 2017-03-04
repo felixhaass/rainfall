@@ -1,0 +1,122 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# rainfall
+
+The `rainfall` package automatically downloads and processes rainfall data from 
+the [Climatic Research Unit at the University of East Anglia](http://www.cru.uea.ac.uk/).
+
+## Installation
+
+The package is currently only available on GitHub. It can be installted through
+the `devtools` package. 
+
+```{r, echo = T, eval=FALSE}
+
+devtools::install_github("felixhaass/rainfall")
+
+```
+
+## Functions & Output
+
+The package uses basically only one function: `download_rain`. This functions
+takes as input an ISO3 country code and downloads a file with monthly rainfall 
+data for this country. 
+
+It outputs a `data.frame` with the following variables. 
+
+- `iso3c`: ISO3 code of a country
+- `YEAR`: Year (currently 1901 - 2015)
+- `month`: Month (character string of month, JAN - DEC)
+- `month_numeric`: Month (numeric, 1-12)
+- `rain`: Monthly mean of rainfall in milimeters per month (https://crudata.uea.ac.uk/cru/data/hrg/#info)
+- `MAM, JJA, SON, DJF`: seasonal sum
+- `ANN`: Annual sum of mean rainfall per month
+
+For more information see `help(download_rain)`.
+
+If you supply a vector of ISO3 country codes `download_rain()` will download
+and combine the data for each country. 
+
+## Usage
+
+We download monthly rainfall data for the Democratic Republic of the Congo. To 
+get the DRC's ISO3 code we use the excellent 
+[`countrycode`](https://cran.r-project.org/web/packages/countrycode/index.html) 
+package.
+
+
+```{r, echo = T, eval=T, warning = F, message=F}
+
+library(countrycode)
+library(rainfall)
+
+country_iso3_list <- countrycode("Democratic Repulic of the Congo", 
+                                 "country.name",
+                                 "iso3c")
+
+drc_rain <- download_rain(country = country_iso3_list, 
+                          long = T, delete_raw = T)
+
+
+```
+
+
+This produces the following `data.frame` named `drc_rain` 
+(only last 12 rows are shown):
+
+
+```{r, echo = F, eval=T}
+
+knitr::kable(tail(drc_rain, 12))
+
+```
+
+The same works for multiple countries:
+
+
+```{r, echo = T, eval=T, warning = F, message=F}
+
+
+# Note that we add several countries to the list
+country_list <- c("Democratic Repulic of the Congo",
+                  "Germany", 
+                  "Philippines", 
+                  "Algeria")
+
+country_iso3_list <- countrycode(country_list, 
+                                 "country.name",
+                                 "iso3c")
+
+compare_rain <- download_rain(country = country_iso3_list, 
+                          long = T, delete_raw = T)
+
+
+```
+
+We can now plot comparison of rainfall in these countries in 2015:
+
+
+```{r rain_comparison, dpi = 200, echo = T, eval=T, warning = F, message=F, fig.path = "./example_images/"}
+
+library(ggplot2)
+library(dplyr)
+
+compare_rain_plot <- compare_rain %>% 
+  filter(YEAR == 2015) %>% 
+  ggplot(., 
+         aes(x = month_numeric, y = rain, group =iso3c)) +
+  geom_line(aes(color = iso3c)) +
+  scale_color_brewer(palette = "RdYlGn") +
+  theme_bw() +
+  scale_x_continuous(breaks=1:12, labels = month.abb) +
+  labs(x = "", y = "Monthly Average Rainfall")
+
+print(compare_rain_plot)
+
+
+```
+
