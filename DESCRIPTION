@@ -1,0 +1,22 @@
+Package: rainfall
+Type: Package
+Title: Downloads Monthly Rainfall Data for Individual Countries
+Version: 0.1.0
+Authors@R: person("Felix", "Haass", email = "haass.felix@gmail.com",
+                  role = c("aut", "cre"))
+Description: The package's sole purpose is to download monthly rainfall 
+  data from the Climate Research Unit (CRU) at the University of East Anglia and
+  return a data frame. If more than one country is specified it combines the data
+  into one data frame.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests:
+  countrycode
+Imports:
+  dplyr,
+  tidyr
+Depends:
+  dplyr, 
+  tidyr
+RoxygenNote: 5.0.1
