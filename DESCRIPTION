@@ -11,6 +11,8 @@ Description: The package's sole purpose is to download monthly rainfall
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/felixhaass/rainfall
+BugReports: https://github.com/felixhaass/rainfall/issues
 Suggests:
   countrycode
 Imports:
