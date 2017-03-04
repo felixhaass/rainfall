@@ -1,7 +1,14 @@
 
+-   [The `rainfall` package](#the-rainfall-package)
+    -   [Installation](#installation)
+    -   [Functions & Output](#functions-output)
+    -   [Usage](#usage)
+    -   [More information on the data](#more-information-on-the-data)
+    -   [Feedback & Questions](#feedback-questions)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-rainfall
-========
+The `rainfall` package
+======================
 
 The `rainfall` package automatically downloads and processes rainfall data from the [Climatic Research Unit at the University of East Anglia](http://www.cru.uea.ac.uk/).
 
@@ -104,3 +111,15 @@ print(compare_rain_plot)
 ```
 
 ![](./example_images/rain_comparison-1.png)
+
+More information on the data
+----------------------------
+
+I did *not* create this data! For more information on the data, see the original research article describing the data:
+
+> Harris, I, PD Jones, TJ Osborn & DH Lister (2014) [Updated high-resolution grids of monthly climatic observations - the CRU TS3.10 Dataset.](http://onlinelibrary.wiley.com/doi/10.1002/joc.3711/abstract) International Journal of Climatology 34(3): 623-642.
+
+Feedback & Questions
+--------------------
+
+For feedback, questions, and problems regarding the package, please use GitHub [Issues.](https://github.com/felixhaass/rainfall/issues).
