@@ -15,7 +15,7 @@ The `rainfall` package automatically downloads and processes rainfall data from 
 Installation
 ------------
 
-The package is currently only available on GitHub. It can be installted through the `devtools` package.
+The package is currently only available on GitHub. It can be installed through the `devtools` package.
 
 ``` r
 devtools::install_github("felixhaass/rainfall")
@@ -118,6 +118,8 @@ More information on the data
 I did *not* create this data! For more information on the data, see the original research article describing the data:
 
 > Harris, I, PD Jones, TJ Osborn & DH Lister (2014) [Updated high-resolution grids of monthly climatic observations - the CRU TS3.10 Dataset.](http://onlinelibrary.wiley.com/doi/10.1002/joc.3711/abstract) International Journal of Climatology 34(3): 623-642.
+
+Or check out the [accompanying web page](https://crudata.uea.ac.uk/cru/data/hrg/).
 
 Feedback & Questions
 --------------------
